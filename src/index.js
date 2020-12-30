@@ -2,6 +2,24 @@ import h from 'hyperscript'
 import { fetchPopular, fetchHighestRated, fetchTrending } from './api'
 import CarouselItem from './CarouselItem'
 
+function imgLazyLoad() {
+  const isIntersecting = intersectionEntry => intersectionEntry.isIntersecting
+
+  let lazyImageObserver = new IntersectionObserver(entries => {
+    entries.filter(isIntersecting).forEach(loadImage)
+  })
+
+  function loadImage(intersectionEntry) {
+    const lazyImage = intersectionEntry.target
+    lazyImage.src = lazyImage.dataset.src
+    lazyImage.classList.remove('lazy')
+    lazyImageObserver.unobserve(lazyImage)
+  }
+
+  const lazyImages = [...document.querySelectorAll('img.lazy')]
+  lazyImages.forEach(lazyImage => lazyImageObserver.observe(lazyImage))
+}
+
 const SectionTitle = title => h('h3.carousel__title', title)
 
 const Carousel = ({ itemsList = [] }) =>
@@ -58,4 +76,10 @@ const Carousel = ({ itemsList = [] }) =>
         itemsList: popular,
       })
     )
+
+  if (document.readyState === 'complete') {
+    imgLazyLoad()
+  } else {
+    document.addEventListener('DOMContentLoaded', imgLazyLoad)
+  }
 })(document, window)
