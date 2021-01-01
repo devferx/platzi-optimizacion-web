@@ -44,11 +44,13 @@ const CarouselItem = ({
   youtubeVideoId,
   startDate,
 }) => {
-  const imgObj = { alt: '' }
-  imgObj['data-src'] = imageUrl
   return h(
     'div.carousel-item',
-    h('img.carousel-item__img.lazy', imgObj),
+    h('img.carousel-item__img', {
+      alt: title,
+      'data-src': imageUrl,
+      'data-background-image': './assets/carousel-item-placeholder.png',
+    }),
     h(
       'div.carousel-item__details',
       Controls({ slug, youtubeVideoId }),

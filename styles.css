@@ -18,6 +18,13 @@ body {
   min-height: 100vh;
 }
 
+html {
+  font-family: Helvetica, Ariel, sans-serif;
+}
+html.wf-active {
+  font-family: 'Muli', sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -178,7 +185,8 @@ footer a {
   width: 100%;
 }
 .carousel {
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   padding-left: 30px;
   width: 100%;
   position: relative;
@@ -186,8 +194,7 @@ footer a {
 }
 
 .carousel__container {
-  font-size: 0;
-  white-space: nowrap;
+  display: flex;
   margin: 70px 0px;
   padding-bottom: 25px;
 }
@@ -196,8 +203,8 @@ footer a {
   will-change: transform;
   border-radius: 20px;
   position: relative;
-  display: inline-block;
   width: 200px;
+  min-width: 200px;
   height: 250px;
   margin-right: 10px;
   font-size: 20px;
