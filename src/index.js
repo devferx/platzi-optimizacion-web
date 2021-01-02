@@ -66,8 +66,17 @@ const Carousel = ({ itemsList = [] }) =>
   const observer = lozad(carouselImages)
   observer.observe()
 
-  const allYoutubeLinks = document.querySelectorAll('.js-video-link')
-  allYoutubeLinks.forEach(link => {
-    link.addEventListener('click', modalListener)
+  document.body.addEventListener('click', event => {
+    // IMG A
+    const tagName = event.target.tagName
+    if (['IMG', 'A'].includes(tagName)) {
+      modalListener(event)
+    }
+    // modalListener
   })
+
+  // const allYoutubeLinks = document.querySelectorAll('.js-video-link')
+  // allYoutubeLinks.forEach(link => {
+  //   link.addEventListener('click', modalListener)
+  // })
 })(document, window)
